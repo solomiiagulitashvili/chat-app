@@ -1,0 +1,33 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && webpack --mode development",
+    "server": "webpack --config server/webpack.config.js & nodemon ./server/dist/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.7.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "fs": "0.0.1-security",
+    "nodemon": "^1.19.4",
+    "webpack": "4.41.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
