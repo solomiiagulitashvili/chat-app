@@ -28,8 +28,13 @@ app.get('/api/room/', getRoomsList);
 app.delete('/api/room/', deleteRoom);
 
 IO.on('connection', (socket) => {
-  socket.on('message', (messageObj) => {
-    message.create(messageObj);
+  socket.on('message', (messageObj, func) => {
+    message.create(messageObj).then((messageCreated) => {
+      message.find({}, (err, messages) => {
+        socket.broadcast.emit('messages', messages);
+        func(messageCreated);
+      });
+    });
   });
 });
 
