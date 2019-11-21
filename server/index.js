@@ -28,13 +28,29 @@ app.get('/api/room/', getRoomsList);
 app.delete('/api/room/', deleteRoom);
 
 IO.on('connection', (socket) => {
+  socket.on('room', (roomId, func) => {
+    if (socket.roomId) {
+      socket.leave(socket.roomId);
+    }
+    socket.roomId = roomId;
+    socket.join(roomId);
+    message
+      .find({ room: roomId })
+      .sort({ datetime: -1 })
+      .limit(10)
+      .then((existantMessages) => func(existantMessages));
+  });
+  console.log(socket.id);
   socket.on('message', (messageObj, func) => {
-    message.create(messageObj).then((messageCreated) => {
-      message.find({}, (err, messages) => {
-        socket.broadcast.emit('messages', messages);
-        func(messageCreated);
+    message
+      .create({ ...messageObj, datetime: new Date() })
+      .then((messageCreated) => {
+        message.find({}, (err, messages) => {
+          console.log(messages);
+          socket.in(message.room).broadcast.emit('messages', messages);
+          func(messageCreated);
+        });
       });
-    });
   });
 });
 
