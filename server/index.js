@@ -36,25 +36,27 @@ IO.on('connection', (socket) => {
     socket.join(roomId);
     message
       .find({ room: roomId })
-      .sort({ datetime: -1 })
-      .limit(10)
-      .then((existantMessages) => func(existantMessages));
-  });
-  console.log(socket.id);
-  socket.on('message', (messageObj, func) => {
-    message
-      .create({ ...messageObj, datetime: new Date() })
-      .then((messageCreated) => {
-        message.find({}, (err, messages) => {
-          console.log(messages);
-          socket.in(message.room).broadcast.emit('messages', messages);
-          func(messageCreated);
-        });
+      .sort({ datetime: 1 })
+      .exec((err, existantMessages) => {
+        func(existantMessages);
       });
+    socket.on('message', (messageObj, funct) => {
+      message
+        .create({ ...messageObj, datetime: new Date() })
+        .then((messageCreated) => {
+          message
+            .find({ room: messageCreated.room })
+            .sort({ datetime: 1 })
+            .exec((err, messages) => {
+              socket.to(messageCreated.room).emit('messages', messages);
+              funct(messages[messages.length - 1]);
+            });
+        });
+    });
   });
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8084;
 Server.listen(PORT, () => {
   console.log(`App listening to ${PORT}....`);
 });
