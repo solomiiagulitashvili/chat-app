@@ -8,6 +8,8 @@ import deleteRoom from './methods/deleteRoom';
 import message from './models/messageDb';
 
 const app = express();
+
+// app.use(express.static())
 const Server = server.createServer(app);
 
 const IO = io(Server, {
