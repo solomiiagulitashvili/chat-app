@@ -8,6 +8,8 @@ import getRoomsList from './methods/getRoomsList';
 import deleteRoom from './methods/deleteRoom';
 import message from './models/messageDb';
 
+require('dotenv').config();
+
 const publicc = path.join(__dirname, 'public');
 
 const app = express();
@@ -26,7 +28,7 @@ const IO = io(Server, {
 app.use(express.json());
 
 (async () => {
-  await mongoose.connect('mongodb://localhost:27017/chat-app', {
+  await mongoose.connect(process.env.MONGOLAB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

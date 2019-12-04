@@ -2,11 +2,10 @@ const path = require('path');
 // const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 // const HtmlWebPackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   mode: 'development',
-  entry: {
-    server: './server/index.js',
-  },
+  entry: path.resolve(__dirname, './index.js'),
   output: {
     path: path.join(__dirname, '../dist'),
     publicPath: '/',

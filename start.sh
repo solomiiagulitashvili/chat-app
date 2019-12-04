@@ -6,6 +6,4 @@ cd ..
 mkdir dist/public/
 cp -a client/build/. dist/public/
 rm -rf client/dist/
-
-
-
+node dist/index.js
