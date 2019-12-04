@@ -4,7 +4,7 @@ cd client/
 npm run build;
 cd ..
 mkdir dist/public/
-cp -a client/dist/. dist/public/
+cp -a client/build/. dist/public/
 rm -rf client/dist/
 
 

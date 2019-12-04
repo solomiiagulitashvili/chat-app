@@ -1,5 +1,6 @@
 import express from 'express';
 import server from 'http';
+import path from 'path';
 import io from 'socket.io';
 import mongoose from 'mongoose';
 import createRoom from './methods/createRoom';
@@ -7,9 +8,15 @@ import getRoomsList from './methods/getRoomsList';
 import deleteRoom from './methods/deleteRoom';
 import message from './models/messageDb';
 
+const publicc = path.join(__dirname, 'public');
+
 const app = express();
 
-// app.use(express.static())
+app.get('/', (req, res) => {
+  res.sendFile(path.join(publicc, 'index.html'));
+});
+app.use('/', express.static(publicc));
+
 const Server = server.createServer(app);
 
 const IO = io(Server, {

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && webpack --mode development --config server/webpack.config.js",
-    "server": "webpack --config server/webpack.config.js & nodemon ./server/dist/index.js"
+    "server": "webpack --config server/webpack.config.js & nodemon ./server/dist/index.js",
+    "start": "bash start.sh"
   },
   "author": "",
   "license": "ISC",
