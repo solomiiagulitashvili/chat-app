@@ -13,7 +13,6 @@ require('dotenv').config();
 const publicc = path.join(__dirname, 'public');
 
 const app = express();
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicc, 'index.html'));
 });
