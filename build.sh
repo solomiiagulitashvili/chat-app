@@ -1,8 +1,9 @@
 rm -rf ./dist
-npm run build;
+webpack --mode production --config server/webpack.config.js;
 cd client/
-npm run build;
+npm run build-client;
 cd ..
-mkdir dist/public/
-cp -a client/build/. dist/public/
-rm -rf client/dist/
+cp  client/build/ dist/public/
+rm -rf client/build/
+
+
