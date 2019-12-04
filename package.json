@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf dist && webpack --mode development --config server/webpack.config.js",
+    "build": "bash build.sh",
     "server": "webpack --config server/webpack.config.js & nodemon ./dist/index.js",
-    "start": "bash start.sh"
+    "start": "node dist/index.js"
   },
   "author": "",
   "license": "ISC",
