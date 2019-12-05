@@ -27,7 +27,7 @@ const IO = io(Server, {
 app.use(express.json());
 
 (async () => {
-  await mongoose.connect(process.env.MONGOLAB_URI, {
+  await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
